@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Pokemon} from "../../modeles/pokemon";
 import {Pokemons} from "../../modeles/pokemons";
 
 @Component({
@@ -10,13 +11,11 @@ import {Pokemons} from "../../modeles/pokemons";
 })
 export class PokemonsComponent {
 
-  public pokemons$: Observable<Pokemons>;
-  public url = "https://pokeapi.co/api/v2/pokemon";
+  public pokemons$: Observable<Pokemon[]>;
 
-  constructor(
-    @Inject(HttpClient) private http: HttpClient
-  ) {
-    const url = '';
-    this.pokemons$ = this.http.get<Pokemons>(this.url);
+  constructor(private http: HttpClient) {
+    this.pokemons$ = this.http.get<Pokemon[]>(
+      "https://pokebuildapi.fr/api/v1/pokemon/limit/100"
+    );
   }
 }

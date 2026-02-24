@@ -3,7 +3,8 @@
   <button>Suivant</button>
 </div>
 <div *ngIf="pokemons$ | async as pokemons" class="cartes">
-  <div *ngFor="let pokemon of pokemons.results" class="carte">
-    <app-pokemon [url]="pokemon.url"></app-pokemon>
+<!--  <pre>{{ pokemons$ | async | json }}</pre>-->
+  <div *ngFor="let pokemon of pokemons" class="carte">
+    <app-pokemon [pokemon]="pokemon"></app-pokemon>
   </div>
 </div>

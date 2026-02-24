@@ -8,19 +8,22 @@ import {Pokemon} from "../../modeles/pokemon";
   templateUrl: './pokemon.component.html',
   styleUrls: ['./pokemon.component.scss']
 })
-export class PokemonComponent implements OnInit {
+export class PokemonComponent
+  // implements OnInit
+{
 
-  @Input() url: string | undefined;
-  public pokemon$: Observable<Pokemon> | undefined;
+  // @Input() url: Pokemon | undefined;
+  // public pokemon$: Observable<Pokemon> | undefined;
+  @Input() pokemon!: Pokemon;
 
   constructor(
     @Inject(HttpClient) private http: HttpClient
   ) {
   }
 
-  ngOnInit(): void {
-    if (this.url) {
-      this.pokemon$ = this.http.get<Pokemon>(this.url);
-    }
-  }
+  // ngOnInit(): void {
+  //   if (this.url) {
+  //     this.pokemon$ = this.http.get<Pokemon>(this.url);
+  //   }
+  // }
 }
