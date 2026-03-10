@@ -1,9 +1,65 @@
 <div class="boutons">
-  <button>Précédent</button>
-  <button>Suivant</button>
+  <button (click)="previous()" [disabled]="offset === 0">Précédent</button>
+  <button (click)="next()">Suivant</button>
 </div>
-<div *ngIf="pokemons$ | async as pokemons" class="cartes">
-  <div *ngFor="let pokemon of pokemons.results" class="carte">
+
+<div *ngIf="pokemons$ | async as pokemons">
+  <div *ngFor="let pokemon of pokemons.results">
     <app-pokemon [url]="pokemon.url"></app-pokemon>
+    <!--    <div *ngFor="let pokemon of pokemons" class="carte">-->
+    <!--      <app-pokemon [pokemon]="pokemon"></app-pokemon>-->
+
   </div>
 </div>
+<div class="container">
+
+  <h2>Liste des pokemons:</h2>
+
+  <hr/>
+
+  <div class="columns">
+    <!-- class="column is-one-third" -->
+    <div style="margin-left:20px">
+<!--      <p>{{ comptage }} pokemons sont in the game</p>-->
+<!--      <p *ngIf="pokemonSelectionne">Le pokemon selectionne est : {{ pokemonSelectionne.name }}</p>-->
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-two-third">
+      <form method="post" #form="ngForm">
+        <div class="field has-addons">
+          <div class="control has-icons-left">
+<!--            <input type="text" class="input is-small" name="pokemonRecherche" [(ngModel)]="formRecherchePokemon.nom" placeholder="Nom du pokemon a chercher" pattern="[a-zA-Z 3]*" [class.is-danger]="form.invalid">-->
+            <!-- <span class="icon is-small is-left"><fa-icon [icon]="faOptinMonster"></fa-icon></span> -->
+            <div *ngIf="form.invalid" class="tag is-danger is light">Le champ doit commencer par une lettre</div>
+<!--            <div *ngIf="easterEgg" id="easterEggs"><img src="https://media3.giphy.com/media/3owzWcKoeJZ5sxNqV2/giphy.gif"/></div>-->
+          </div>
+          <div class="control">
+            <!-- <a class="button is-primary is-small" (click)="recherchePokemon(formRecherchePokemon.nom)" [class.is-danger]="form.invalid">Rechercher</a> -->
+<!--            <a class="button is-primary is-small" (click)="recherchePokemon(formRecherchePokemon.nom)" [class.is-danger]="form.invalid">Rechercher</a>-->
+          </div>
+          <div class="control">
+<!--            <a class="button is-light is-small" (click)="annulerRecherche()" id="btnRechercher">Annuler</a>-->
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<!--  <div *ngIf="pokemons$.length<1">Aucun pokemon trouve</div>-->
+
+<!--  <p *ngIf="pokemons$.length!=1">Les 20 premiers sont : </p>-->
+<!--  <p *ngIf="pokemons$.length==1">La recherche donne : </p>-->
+
+<!--  <div class="columns is-multiline" style="margin: 0 auto;">-->
+<!--    <ul class="menu-list column is-one-third" style="margin: 0 ;" *ngFor="let pokemon of pokemons$">-->
+<!--      <li>-->
+<!--        <app-pokemon [pokemonInput]="pokemon" (evnt)="pokemonSelectionne=$event"></app-pokemon>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+
+</div>
+
+<hr/>

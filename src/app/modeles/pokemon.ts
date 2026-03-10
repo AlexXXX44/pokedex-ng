@@ -1,5 +1,8 @@
 export interface Pokemon {
-  name: string;
+  // name: string;
+  image: string;
+  // apiTypes: { name: string; image: string }[];
+// }
   types: [
     {
       slot: number;

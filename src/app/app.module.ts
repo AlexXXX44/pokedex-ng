@@ -8,22 +8,25 @@ import {PokemonsComponent} from './composants/pokemons/pokemons.component';
 import {GenerationsComponent} from './composants/generations/generations.component';
 import {PokemonComponent} from './composants/pokemon/pokemon.component';
 import {NgOptimizedImage} from "@angular/common";
+import { BadgesComponent } from './composants/badges/badges.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PokemonsComponent,
-    GenerationsComponent,
-    PokemonComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    AppComponent,
+    PokemonsComponent,
+    PokemonComponent,
+    BadgesComponent,
+    GenerationsComponent
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  // bootstrap: [AppComponent]
 })
 export class AppModule {
 }
