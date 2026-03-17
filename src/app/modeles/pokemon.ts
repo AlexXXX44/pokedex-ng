@@ -1,5 +1,6 @@
 export interface Pokemon {
-  // name: string;
+  url: string | undefined;
+  name: string;
   image: string;
   // apiTypes: { name: string; image: string }[];
 // }

@@ -15,7 +15,6 @@ export class PokemonComponent implements OnInit {
   @Input() url: string | undefined;
   public pokemon$: Observable<Pokemon> | undefined;
   @Input() pokemon!: { name: string; image: string; apiTypes: any };
-  @Input() pokemonInput!: any;
 
   constructor(
     @Inject(HttpClient) private http: HttpClient
