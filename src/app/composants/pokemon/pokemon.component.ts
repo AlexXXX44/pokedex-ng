@@ -12,13 +12,21 @@ import {Observable} from "rxjs";
 })
 export class PokemonComponent implements OnInit {
 
+  @Input() pokemon!: Pokemon;
   @Input() url: string | undefined;
   public pokemon$: Observable<Pokemon> | undefined;
-  @Input() pokemon!: { name: string; image: string; apiTypes: any };
 
   constructor(
     @Inject(HttpClient) private http: HttpClient
-  ) {
+  ) {}
+
+  getImage(): string {
+
+    return this.pokemon?.sprites?.other?.dream_world?.front_default
+      // || this.pokemon?.sprites?.other?.['official-artwork']?.front_default
+      || this.pokemon?.sprites?.other.dream_world.front_default
+      || 'assets/no-image.png';
+
   }
 
   ngOnInit(): void {

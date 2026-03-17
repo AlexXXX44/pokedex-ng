@@ -43,7 +43,10 @@
   <div class="pokemon-grid">
 
     <div *ngFor="let pokemon of filteredPokemons">
-      <app-pokemon [url]="pokemon.sprites.other.dream_world.front_default"></app-pokemon>
+      <app-pokemon
+        [pokemon]="pokemon">
+<!--      || pokemon.sprites?.other?.['official-artwork']?.front_default">-->
+      </app-pokemon>
     </div>
 
   </div>

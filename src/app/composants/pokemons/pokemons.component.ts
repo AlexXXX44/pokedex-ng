@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
+import {NgForOf} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {PokemonComponent} from "../pokemon/pokemon.component";
 import {FormsModule} from "@angular/forms";
