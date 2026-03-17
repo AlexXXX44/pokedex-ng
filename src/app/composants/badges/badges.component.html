@@ -1,0 +1,15 @@
+<div *ngIf="badges$ | async as badges" class="badges">
+
+  <div *ngFor="let badge of badges" class="badge">
+
+    <img
+      ngSrc="'https://pokemon-origins.gitlab.io/api/images/badges/' + badge.id + '.png'"
+      [alt]="badge.name"
+      width="60"
+    />
+
+    <p>{{ badge.name }}</p>
+
+  </div>
+
+</div>
