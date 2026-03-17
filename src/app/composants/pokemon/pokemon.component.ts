@@ -10,7 +10,9 @@ import {Observable} from "rxjs";
   imports: [CommonModule],
   templateUrl: './pokemon.component.html'
 })
-export class PokemonComponent implements OnInit {
+export class PokemonComponent
+  // implements OnInit
+{
 
   @Input() pokemon!: Pokemon;
   @Input() url: string | undefined;
@@ -29,9 +31,9 @@ export class PokemonComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    if (this.url) {
-      this.pokemon$ = this.http.get<Pokemon>(this.url);
-    }
-  }
+  // ngOnInit(): void {
+  //   if (this.url) {
+  //     this.pokemon$ = this.http.get<Pokemon>(this.url);
+  //   }
+  // }
 }
