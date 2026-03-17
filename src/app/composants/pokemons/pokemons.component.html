@@ -3,13 +3,15 @@
   <button (click)="next()">Suivant</button>
 </div>
 
-<!--<div *ngIf="pokemons$ | async as pokemons">-->
-<!--  <div *ngFor="let pokemon of pokemons.results">-->
-<!--    <app-pokemon [url]="pokemon.url"></app-pokemon>-->
-    <!--    <div *ngFor="let pokemon of pokemons" class="carte">-->
-    <!--      <app-pokemon [pokemon]="pokemon"></app-pokemon>-->
-<!--  </div>-->
-<!--</div> -->
+<select [(ngModel)]="selectedGeneration" (change)="filterPokemons()">
+
+  <option value="">Toutes les générations</option>
+
+  <option *ngFor="let gen of generations" [value]="gen.id">
+    {{ gen.label }}
+  </option>
+
+</select>
 
 <div class="container">
 

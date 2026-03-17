@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {PokemonComponent} from "../pokemon/pokemon.component";
 import {FormsModule} from "@angular/forms";
 import {Pokemon} from "../../modeles/pokemon";
+import {Generation} from "../../modeles/generation";
 
 interface PokeApiResponse {
   count: number;
@@ -32,8 +33,10 @@ export class PokemonsComponent {
 
   searchTerm = '';
   selectedType = '';
+  selectedGeneration = '';
 
   types: string[] = [];
+  generations: Generation[] = [];
 
   constructor(private http: HttpClient) {
     this.loadPokemons();
@@ -87,7 +90,11 @@ export class PokemonsComponent {
         this.selectedType === '' ||
         pokemon.types.some(t => t.type.name === this.selectedType);
 
-      return matchName && matchType;
+      const matchGeneration =
+        this.selectedGeneration === '' ||
+        this.getGeneration(pokemon.id) === Number(this.selectedGeneration);
+
+      return matchName && matchType && matchGeneration;
 
     });
 
@@ -110,5 +117,19 @@ export class PokemonsComponent {
   previous() {
     this.offset = Math.max(0, this.offset - this.limit);
     this.loadPokemons();
+  }
+
+  private getGeneration(id: number): number {
+
+    if (id <= 151) return 1;
+    if (id <= 251) return 2;
+    if (id <= 386) return 3;
+    if (id <= 493) return 4;
+    if (id <= 649) return 5;
+    if (id <= 721) return 6;
+    if (id <= 809) return 7;
+    if (id <= 905) return 8;
+
+    return 9;
   }
 }
