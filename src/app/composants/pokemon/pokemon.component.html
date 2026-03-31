@@ -57,23 +57,30 @@
   font-weight: bold;
   text-transform: capitalize;
 }</style>
-<div class="pokemon-container" *ngIf="pokemon$ | async as pokemon">
-
-  <figure class="card" [ngClass]="'card--' + pokemon.types[0].type.name">
-
-    <div class="pokemon-card">
-      <img [src]="pokemon.types[0].type.name"
-           [alt]="pokemon.name"
-           class="card__image">
+<div *ngIf="pokemon$ | async as pokemon">
+  <figure class="card card--{{ pokemon.types[0].type.name }}">
+    <div class="card__image-container">
+      <img [src]="pokemon.sprites.other.dream_world.front_default" [alt]="pokemon.types"
+           class="card__image" fill>
     </div>
-
-    <figcaption>
-      <p>
-        <span *ngFor="let t of pokemon.types; let last = last">
-          {{ t.type.name }}{{ !last ? ' / ' : '' }}
-        </span>
-      </p>
+    <figcaption class="card__caption">
+      <!--      <h1 class="card__name">{{pokemon.name | titlecase}}</h1>-->
     </figcaption>
-
   </figure>
+  <div class="pokemon-card">
+    <img [src]="getImage()" [alt]="pokemon.name">
+  </div>
+
 </div>
+<figure class="card card--{{ pokemon.types[0].type.name }}">
+  <div class="card__image-container">
+    <img [src]="pokemon.types[0].type.name" [alt]="pokemon.types[0].type.name" class="card__image">
+  </div>
+
+  <p>
+    Types: {{ pokemon.types[0].type.name }}
+    <span *ngFor="let t of pokemon.types; let last = last">
+  {{ t.type.name }}<span *ngIf="!last"> / </span>
+  </span>
+  </p>
+</figure>
