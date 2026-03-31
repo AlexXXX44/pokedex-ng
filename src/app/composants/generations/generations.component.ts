@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-generations',
   templateUrl: './generations.component.html',
   standalone: true,
+  imports: [
+    FormsModule
+  ],
   styleUrls: ['./generations.component.scss']
 })
 export class GenerationsComponent {
@@ -18,4 +22,10 @@ export class GenerationsComponent {
     { id: 8, label: 'Gen 8' },
     { id: 9, label: 'Gen 9' }
   ];
+  protected selectedGeneration: any;
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  protected onGenerationChange() {
+
+  }
 }

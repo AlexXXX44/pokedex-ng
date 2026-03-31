@@ -1,1 +1,9 @@
-<p>generations works!</p>
+<select [(ngModel)]="selectedGeneration" (change)="onGenerationChange()">
+
+  <option value="">Toutes les générations</option>
+
+  <option *ngFor="let gen of generations" [value]="gen.id">
+    {{ gen.label }}
+  </option>
+
+</select>

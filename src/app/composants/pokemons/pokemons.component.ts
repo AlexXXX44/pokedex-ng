@@ -67,6 +67,31 @@ export class PokemonsComponent {
 
   }
 
+  loadByGeneration(genId: number) {
+
+    this.http.get<any>(
+      `https://pokeapi.co/api/v2/generation/${genId}`
+    ).subscribe(response => {
+
+      this.pokemons = [];
+
+      response.pokemon_species.forEach((p: any) => {
+
+        this.http.get<Pokemon>(
+          `https://pokeapi.co/api/v2/pokemon/${p.name}`
+        ).subscribe(fullPokemon => {
+
+          this.pokemons.push(fullPokemon);
+          this.filteredPokemons = [...this.pokemons];
+          this.extractTypes();
+
+        });
+
+      });
+
+    });
+  }
+
   extractTypes() {
 
     const typeSet = new Set<string>();
@@ -83,13 +108,16 @@ export class PokemonsComponent {
 
     this.filteredPokemons = this.pokemons.filter(pokemon => {
 
+      const searchTerm = '';
       const matchName =
         pokemon.name.toLowerCase().includes(this.searchTerm.toLowerCase());
 
+      const selectedType = '';
       const matchType =
         this.selectedType === '' ||
         pokemon.types.some(t => t.type.name === this.selectedType);
 
+      const selectedGeneration = '';
       const matchGeneration =
         this.selectedGeneration === '' ||
         this.getGeneration(pokemon.id) === Number(this.selectedGeneration);
@@ -131,5 +159,13 @@ export class PokemonsComponent {
     if (id <= 905) return 8;
 
     return 9;
+  }
+
+  protected onGenerationChange() {
+    if(this.selectedGeneration === ''){
+      this.loadPokemons();
+    } else {
+      this.loadByGeneration(Number(this.selectedGeneration));
+    }
   }
 }

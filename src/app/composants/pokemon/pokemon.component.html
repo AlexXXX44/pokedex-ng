@@ -1,43 +1,79 @@
-<div *ngIf="pokemon$ | async as pokemon">
-  <figure class="card card--{{ pokemon.types[0].type.name }}">
-    <div class="card__image-container">
-      <img [src]="pokemon.sprites.other.dream_world.front_default" [alt]="pokemon.types"
-           class="card__image" fill>
+<style>/* Conteneur principal pour centrer la carte sur la page */
+.pokemon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  padding: 20px;
+}
+
+/* Base de la carte */
+.card {
+  width: 240px;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: transform 0.3s ease;
+  margin: 0 auto;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Normalisation de l'image */
+.card__image-container {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card__image {
+  width: 80%;
+  height: 80%;
+  object-fit: contain; /* Garde les proportions sans déformer */
+}
+
+/* Couleurs variables selon le type */
+.card--fire     { background: linear-gradient(135deg, #ff9d55, #ff5f1f); color: white; }
+.card--water    { background: linear-gradient(135deg, #5090d6, #1467c5); color: white; }
+.card--grass    { background: linear-gradient(135deg, #63bb5b, #389132); color: white; }
+.card--electric { background: linear-gradient(135deg, #f4d23c, #eec000); color: black; }
+.card--psychic  { background: linear-gradient(135deg, #fa7179, #ef3f4a); color: white; }
+.card--poison   { background: linear-gradient(135deg, #ab6ac8, #7b3d95); color: white; }
+.card--default  { background: #a8a878; color: white; }
+
+/* Style du texte */
+.card p {
+  margin-top: 10px;
+  font-weight: bold;
+  text-transform: capitalize;
+}</style>
+<div class="pokemon-container" *ngIf="pokemon$ | async as pokemon">
+
+  <figure class="card" [ngClass]="'card--' + pokemon.types[0].type.name">
+
+    <div class="pokemon-card">
+      <img [src]="pokemon.types[0].type.name"
+           [alt]="pokemon.name"
+           class="card__image">
     </div>
-    <figcaption class="card__caption">
-      <!--      <h1 class="card__name">{{pokemon.name | titlecase}}</h1>-->
+
+    <figcaption>
+      <p>
+        <span *ngFor="let t of pokemon.types; let last = last">
+          {{ t.type.name }}{{ !last ? ' / ' : '' }}
+        </span>
+      </p>
     </figcaption>
+
   </figure>
 </div>
-<div class="pokemon-card">
-
-  <img [src]="getImage()" [alt]="pokemon.name">
-
-</div>
-<figure class="card card--{{ pokemon.types[0].type.name }}">
-  <div class="card__image-container">
-    <img [src]="pokemon.types[0].type.name" [alt]="pokemon.types[0].type.name" class="card__image">
-  </div>
-
-  <!--  <div *ngIf="pokemon.types[1]">-->
-  <!--    <div class="card__image-container">-->
-  <!--      <img [src]="pokemon.types[1].image" [alt]="pokemon.types[1].name" class="card__image">-->
-  <!--    </div>-->
-  <!--  </div>-->
-
-  <p>
-    Types: {{ pokemon.types[0].type.name }}
-    <span *ngFor="let t of pokemon.types; let last = last">
-  {{ t.type.name }}<span *ngIf="!last"> / </span>
-  </span>
-  </p>
-
-  <!--  <div class="card__image-container">-->
-  <!--    <img [src]="pokemon.image" [alt]="pokemon.name" class="card__image">-->
-  <!--  </div>-->
-
-  <!--  <figcaption class="card__caption">-->
-  <!--    <h1 class="card__name">{{ pokemon.name | titlecase }}</h1>-->
-  <!--  </figcaption>-->
-  <!--</figure>-->
-</figure>
