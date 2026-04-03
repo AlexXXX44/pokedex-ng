@@ -56,21 +56,44 @@
   margin-top: 10px;
   font-weight: bold;
   text-transform: capitalize;
+}
+/* Pour éviter que l'image de fond du site ne perturbe la carte */
+.pokemon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* On force la carte à ne pas dépasser et à rester centrée */
+.card {
+  display: inline-block; /* Pour qu'elle s'adapte à sa largeur fixe */
+  margin: 0 auto;
+}
+
+.card__name {
+  margin: 10px 0 5px 0;
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.card__types {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 5px 10px;
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: bold;
 }</style>
-<div *ngIf="pokemon$ | async as pokemon">
+<div class="pokemon-container" *ngIf="pokemon$ | async as pokemon">
   <figure class="card card--{{ pokemon.types[0].type.name }}">
     <div class="card__image-container">
       <img [src]="pokemon.sprites.other.dream_world.front_default" [alt]="pokemon.types"
            class="card__image" fill>
     </div>
-    <figcaption class="card__caption">
-      <!--      <h1 class="card__name">{{pokemon.name | titlecase}}</h1>-->
-    </figcaption>
   </figure>
-</div>
-  <div class="pokemon-card">
-    <img [src]="getImage()" [alt]="pokemon.name">
-
 </div>
 <figure class="card card--{{ pokemon.types[0].type.name }}">
   <div class="card__image-container">
@@ -78,7 +101,7 @@
   </div>
 
   <p>
-    Types: {{ pokemon.types[0].type.name }}
+    Type(s): {{ pokemon.types[0].type.name }}
     <span *ngFor="let t of pokemon.types; let last = last">
   {{ t.type.name }}<span *ngIf="!last"> / </span>
   </span>
