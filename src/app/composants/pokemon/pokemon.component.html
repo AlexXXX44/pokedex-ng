@@ -97,13 +97,13 @@
 </div>
 <figure class="card card--{{ pokemon.types[0].type.name }}">
   <div class="card__image-container">
-    <img [src]="pokemon.types[0].type.name" [alt]="pokemon.types[0].type.name" class="card__image">
+    <img [src]="pokemon.sprites.other.dream_world.front_default" [alt]="" class="card__image">
   </div>
 
   <p>
     Type(s): {{ pokemon.types[0].type.name }}
     <span *ngFor="let t of pokemon.types; let last = last">
-  {{ t.type.name }}<span *ngIf="!last"> / </span>
+  {{ t.type.name }}
   </span>
   </p>
 </figure>
