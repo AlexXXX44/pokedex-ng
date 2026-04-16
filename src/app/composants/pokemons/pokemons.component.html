@@ -3,16 +3,6 @@
   <button (click)="next()">Suivant</button>
 </div>
 
-<select [(ngModel)]="selectedGeneration" (change)="filterPokemons()">
-
-  <option value="">Toutes les générations</option>
-
-  <option *ngFor="let gen of generations" [value]="gen.id">
-    {{ gen.label }}
-  </option>
-
-</select>
-
 <div class="container">
 
   <h2>Liste des Pokémon</h2>
@@ -20,34 +10,28 @@
   <!-- Barre de recherche -->
   <div class="search-bar">
 
-    <input
-      type="text"
-      placeholder="Rechercher un Pokémon..."
-      [(ngModel)]="searchTerm"
-      (input)="filterPokemons()"
-      class="input"
-    />
+    <input [(ngModel)]="searchTerm" (input)="filterPokemons()" placeholder="Rechercher un Pokémon...">
 
     <select [(ngModel)]="selectedType" (change)="filterPokemons()">
       <option value="">Tous les types</option>
-      <option *ngFor="let type of types" [value]="type">
-        {{ type }}
-      </option>
+      <option *ngFor="let type of types" [value]="type">{{ type }}</option>
     </select>
 
-    <button (click)="resetFilters()">Réinitialiser</button>
+    <select [(ngModel)]="selectedGeneration" (change)="onGenerationChange()">
+      <option value="">Toutes les générations</option>
+      <option *ngFor="let gen of generations" [value]="gen.id">{{ gen.label }}</option>
+    </select>
 
-  </div>
+<!--<app-generations></app-generations>-->
+</div>
 
-  <p>{{ filteredPokemons.length }} Pokémon trouvés</p>
-
+<p>{{ filteredPokemons.length }} Pokémon trouvés</p>
   <!-- Liste -->
   <div class="pokemon-grid">
 
     <div *ngFor="let pokemon of filteredPokemons">
       <app-pokemon
         [pokemon]="pokemon">
-<!--      || pokemon.sprites?.other?.['official-artwork']?.front_default">-->
       </app-pokemon>
     </div>
 
